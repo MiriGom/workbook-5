@@ -208,27 +208,32 @@ public class UserInterface {
         String custName = scan.nextLine();
         System.out.println("Enter the email address of the customer");
         String custEmail = scan.nextLine();
+        System.out.println("Please enter the vin of car to purchase or lease");
+        int userCarVin = scan.nextInt();
+        scan.nextLine();
         System.out.println("Does the customer want to buy or lease?");
         String custInput = scan.nextLine();
-            if (custInput.equalsIgnoreCase("buy")) {
-             //   SalesContract sc = new SalesContract(custName, custEmail, custInput);
-                getSalesContract();
+        Contract contract = null;
+        Vehicle vehicleSold = dealership.getVehicleByVin(userCarVin);
+
+        if (custInput.equalsIgnoreCase("buy")) {
+                boolean custFinance = getSalesContract();
+                        contract = new SalesContract(custName, custEmail, vehicleSold, custFinance);
             } if (custInput.equalsIgnoreCase("lease")){
-              //  getLeaseContract
+                contract = new LeaseContract(custName, custEmail, vehicleSold );
             }
-
-
+        ContractDataManager contractDataManager = new ContractDataManager();
+        contractDataManager.saveContract(contract);
     }
-    public String getSalesContract() //extends Contract
+
+    public boolean getSalesContract() //extends Contract
     {
         System.out.println("Does the customer want to finance?");
         String userInput = scan.nextLine();
         if (userInput.equalsIgnoreCase("yes")) {
-            //  if (Vehicle price >= $10,0000) {
-            //  getTotalPrice()
-            //   } else
+            return true;
         }
-        return userInput;
+        return false;
     }
 
 

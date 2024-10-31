@@ -107,6 +107,15 @@ public class Dealership {
         }
         return inventory;
     }
+    public Vehicle getVehicleByVin(int userCarVin) {
+        for (Vehicle v : inventory) {
+            if (v.getVin() == userCarVin) {
+                return v;
+            } else {
+                System.out.println("This car is not at this Dealership");
+            }
+        } return null;
+    }
     public void addVehicle(Vehicle v) {
         inventory.add(v);
 

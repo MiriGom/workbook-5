@@ -189,7 +189,7 @@ public class ContractDataManager {
          */
   //  }
     //Need to fix ASAP
-    public void saveContract() {
+    public void saveContract(Contract contract) {
         try {
             FileWriter writer = new FileWriter(contractFilePath);
             BufferedWriter bufWriter = new BufferedWriter(writer);
