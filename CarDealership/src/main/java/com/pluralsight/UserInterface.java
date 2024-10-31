@@ -64,6 +64,8 @@ public class UserInterface {
                     case 9:
                         processRemoveVehicleRequest();
                         break;
+                    case 10:
+                        getContractInfo();
                     case 99:
                         System.out.println("Bye Bye now");
                         isRunning =false;
@@ -199,4 +201,35 @@ public class UserInterface {
             }
         }
     }
+    //TODO instantiate contractDataManager
+    public  void getContractInfo() {
+       // ContractFileManager contractFileManager = new ContractFileManager();
+        System.out.println("Enter name of the customer ");
+        String custName = scan.nextLine();
+        System.out.println("Enter the email address of the customer");
+        String custEmail = scan.nextLine();
+        System.out.println("Does the customer want to buy or lease?");
+        String custInput = scan.nextLine();
+            if (custInput.equalsIgnoreCase("buy")) {
+             //   SalesContract sc = new SalesContract(custName, custEmail, custInput);
+                getSalesContract();
+            } if (custInput.equalsIgnoreCase("lease")){
+              //  getLeaseContract
+            }
+
+
+    }
+    public String getSalesContract() //extends Contract
+    {
+        System.out.println("Does the customer want to finance?");
+        String userInput = scan.nextLine();
+        if (userInput.equalsIgnoreCase("yes")) {
+            //  if (Vehicle price >= $10,0000) {
+            //  getTotalPrice()
+            //   } else
+        }
+        return userInput;
+    }
+
+
 }

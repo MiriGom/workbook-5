@@ -1,59 +1,51 @@
 package com.pluralsight;
 
 public class SalesContract extends Contract{
-    private double salesTax;
-    private double recordingFee;
-    private double processingFee;
+    private final double salesTax;
+    private final double recordingFee;
+    private final double processingFee;
     private boolean financing;
-    private double monthlyPaymentFinanced;
 
-    SalesContract(double salesTax, double recordingFee, double processingFee, boolean financing, double monthlyPaymentFinanced, String customerName, String customerEmail, String dateOfContract, Vehicle vehicleSold, double totalPrice, double monthlyPayment) {
-        super(customerName, customerEmail, dateOfContract, vehicleSold, totalPrice, monthlyPayment);
-        this.salesTax = salesTax;
-        this.recordingFee = recordingFee;
-        this.processingFee = processingFee;
+
+
+    SalesContract(String customerName, String customerEmail, Vehicle vehicleSold, boolean financing) {
+        super(customerName, customerEmail, vehicleSold);
+        this.salesTax = 0.05;
+        this.recordingFee = 100.00;
+        this.processingFee = vehicleSold.getPrice() >= 10000? 495:295;
         this.financing = financing;
-        this.monthlyPaymentFinanced = monthlyPaymentFinanced;
+        if (vehicleSold.getPrice() >= 10000 && financing) {
+            monthlyPayment = vehicleSold.getPrice() * 0.0425;
+        } if (vehicleSold.getPrice() < 10000 && financing) {
+            monthlyPayment = vehicleSold.getPrice() * 0.0525;
+        }
     }
 
     public double getSalesTax() {
         return salesTax;
     }
-
-    public void setSalesTax(double salesTax) {
-        this.salesTax = salesTax;
-    }
-
     public double getRecordingFee() {
         return recordingFee;
     }
-
-    public void setRecordingFee(double recordingFee) {
-        this.recordingFee = recordingFee;
-    }
-
     public double getProcessingFee() {
         return processingFee;
     }
-
-    public void setProcessingFee(double processingFee) {
-        this.processingFee = processingFee;
-    }
-
     public boolean isFinancing() {
         return financing;
     }
-
     public void setFinancing(boolean financing) {
         this.financing = financing;
     }
+    @Override
+    public double getTotalPrice(){
 
-    public double getMonthlyPaymentFinanced() {
-        return monthlyPaymentFinanced;
+        totalPrice = (vehicleSold.getPrice() + processingFee + recordingFee) * (1 + salesTax );
+        return totalPrice;
+    }
+    @Override
+    public double getMonthlyPayment() {
+        return monthlyPayment;
     }
 
-    public void setMonthlyPaymentFinanced(double monthlyPaymentFinanced) {
-        this.monthlyPaymentFinanced = monthlyPaymentFinanced;
-    }
-    //provide overrides for getTotalPrice and getMonthlyPayments
+    //provide overrides for getTotalPrice and getMonthlyPaymentscv
 }
