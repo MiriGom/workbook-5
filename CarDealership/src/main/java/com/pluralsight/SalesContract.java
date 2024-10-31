@@ -18,6 +18,8 @@ public class SalesContract extends Contract{
             monthlyPayment = vehicleSold.getPrice() * 0.0425;
         } if (vehicleSold.getPrice() < 10000 && financing) {
             monthlyPayment = vehicleSold.getPrice() * 0.0525;
+        } else {
+            monthlyPayment = 0;
         }
     }
 
