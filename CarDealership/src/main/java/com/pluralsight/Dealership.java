@@ -8,7 +8,7 @@ public class Dealership {
     private final String address;
     private final String phone;
     private final ArrayList<Vehicle> inventory = new ArrayList<>();
-    private ArrayList<Contract> contractList = new ArrayList<>();
+
 
     //Main constructor
     Dealership(String name, String address, String phone){
@@ -111,8 +111,6 @@ public class Dealership {
         for (Vehicle v : inventory) {
             if (v.getVin() == userCarVin) {
                 return v;
-            } else {
-                System.out.println("This car is not at this Dealership");
             }
         } return null;
     }
@@ -123,4 +121,5 @@ public class Dealership {
     public void removeVehicle(Vehicle v){
         inventory.remove(v);
     }
+
 }

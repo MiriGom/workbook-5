@@ -1,9 +1,12 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContractDataManager {
-    static String contractFilePath = "contracts";
+    static String contractFilePath = "contracts.csv";
+    List<Contract> contractList = new ArrayList<>();
     //public Contract getContract() throws IOException {
         /*
         BufferedReader bufReader = new BufferedReader(new FileReader(contractFilePath));
@@ -191,10 +194,14 @@ public class ContractDataManager {
     //Need to fix ASAP
     public void saveContract(Contract contract) {
         try {
-            FileWriter writer = new FileWriter(contractFilePath);
+            FileWriter writer = new FileWriter(contractFilePath, true);
             BufferedWriter bufWriter = new BufferedWriter(writer);
 
+            contractList.add(contract);
 
+            bufWriter.write(contract.toString());
+
+            bufWriter.close();
         } catch (IOException e) {
             System.out.println("Problem writing to file");
         }

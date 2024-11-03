@@ -66,6 +66,7 @@ public class UserInterface {
                         break;
                     case 10:
                         getContractInfo();
+                        break;
                     case 99:
                         System.out.println("Bye Bye now");
                         isRunning =false;
@@ -210,20 +211,25 @@ public class UserInterface {
         String custEmail = scan.nextLine();
         System.out.println("Please enter the vin of car to purchase or lease");
         int userCarVin = scan.nextInt();
+        Vehicle vehicleSold = dealership.getVehicleByVin(userCarVin);
+       // while (vehicleSold != null){
+           // scan.nextInt();
+      //  }
         scan.nextLine();
         System.out.println("Does the customer want to buy or lease?");
         String custInput = scan.nextLine();
         Contract contract = null;
-        Vehicle vehicleSold = dealership.getVehicleByVin(userCarVin);
+        dealership.removeVehicle(vehicleSold);
 
         if (custInput.equalsIgnoreCase("buy")) {
                 boolean custFinance = getSalesContract();
                         contract = new SalesContract(custName, custEmail, vehicleSold, custFinance);
+
             } if (custInput.equalsIgnoreCase("lease")){
                 contract = new LeaseContract(custName, custEmail, vehicleSold );
             }
-        ContractDataManager contractDataManager = new ContractDataManager();
-        contractDataManager.saveContract(contract);
+        new ContractDataManager().saveContract(contract);
+
     }
 
     public boolean getSalesContract() //extends Contract

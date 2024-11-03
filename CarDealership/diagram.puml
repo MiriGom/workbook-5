@@ -1,0 +1,132 @@
+@startuml
+class com.pluralsight.Dealership {
+- String name
+- String address
+- String phone
+- ArrayList<Vehicle> inventory
++ String getName()
++ String getAddress()
++ String getPhone()
++ List<Vehicle> getVehiclesByPrice(double,double)
++ List<Vehicle> getVehiclesByMakeModel(String,String)
++ List<Vehicle> getVehiclesByYear(int,int)
++ List<Vehicle> getVehiclesByColor(String)
++ List<Vehicle> getVehiclesByMileage(int,int)
++ List<Vehicle> getVehiclesByType(String)
++ List<Vehicle> getAllVehicles()
++ Vehicle getVehicleByVin(int)
++ void addVehicle(Vehicle)
++ void removeVehicle(Vehicle)
+}
+
+
+class com.pluralsight.Vehicle {
+- int vin
+- int year
+- String make
+- String model
+- String vehicleType
+- String color
+- int odometer
+- double price
++ int getVin()
++ int getYear()
++ String getModel()
++ String getMake()
++ String getVehicleType()
++ String getColor()
++ int getOdometer()
++ double getPrice()
++ String toString()
+}
+
+
+class com.pluralsight.LeaseContract {
+- double expectedEndingValue
+- double leaseFee
+- double monthlyLeaseFinance
++ double getExpectedEndingValue()
++ void setExpectedEndingValue(double)
++ double getLeaseFee()
++ void setLeaseFee(double)
++ double getMonthlyLeaseFinance()
++ void setMonthlyLeaseFinance(double)
++ double getTotalPrice()
++ double getMonthlyPayment()
++ String toString()
+}
+
+
+class com.pluralsight.UserInterface {
+~ Scanner scan
+- Dealership dealership
++ void userInterface()
++ void display()
+- void init()
++ void processGetByPriceRequest()
++ void processGetByMakeModelRequest()
++ void processGetByYearRequest()
++ void processGetByColorRequest()
++ void processGetByMileageRequests()
++ void processGetByVehicleTypeRequest()
++ void processGetAllVehicleRequest()
++ void processAddVehicleRequest()
++ void processRemoveVehicleRequest()
++ void getContractInfo()
++ boolean getSalesContract()
+}
+
+
+class com.pluralsight.SalesContract {
+- double salesTax
+- double recordingFee
+- double processingFee
+- boolean financing
++ double getSalesTax()
++ double getRecordingFee()
++ double getProcessingFee()
++ boolean isFinancing()
++ void setFinancing(boolean)
++ double getTotalPrice()
++ double getMonthlyPayment()
++ String toString()
+}
+
+
+class com.pluralsight.Program {
+~ {static} Scanner scan
++ {static} void main(String[])
+}
+
+
+class com.pluralsight.ContractDataManager {
+~ {static} String contractFilePath
+~ List<Contract> contractList
++ void saveContract(Contract)
+}
+
+
+class com.pluralsight.DealershipFileManager {
+~ {static} String filePath
++ Dealership getDealership()
++ void saveDealership(Dealership)
+}
+
+
+abstract class com.pluralsight.Contract {
+# String customerName
+# String customerEmail
+# String dateOfContract
+# Vehicle vehicleSold
+# double totalPrice
+# double monthlyPayment
++ {abstract}double getTotalPrice()
++ {abstract}double getMonthlyPayment()
+}
+
+
+
+
+com.pluralsight.Contract <|-- com.pluralsight.LeaseContract
+com.pluralsight.Contract <|-- com.pluralsight.SalesContract
+@enduml

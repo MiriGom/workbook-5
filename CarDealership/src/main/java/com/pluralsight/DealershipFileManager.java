@@ -76,7 +76,7 @@ public class DealershipFileManager {
 
             String vehicleToCsvLine;
             for (Vehicle v : dealership.getAllVehicles()) {
-                vehicleToCsvLine = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f\n", v.getVin(), v.getYear(), v.getMake(), v.getModel(), v.getColor(), v.getVehicleType(), v.getOdometer(), v.getPrice());
+                vehicleToCsvLine = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f\n", v.getVin(), v.getYear(), v.getMake(), v.getModel(), v.getVehicleType(), v.getColor(), v.getOdometer(), v.getPrice());
                 bufWriter.write(vehicleToCsvLine);
             }
             bufWriter.close();
